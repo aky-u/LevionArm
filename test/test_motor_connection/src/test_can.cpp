@@ -10,7 +10,8 @@
 
 int main(int argc, char **argv)
 {
-  const char *ifname = "can0"; // CAN interface name
+  const char *ifname = "can0";  // CAN interface name
+  const canid_t can_id = 0x104; // CAN ID
 
   struct sockaddr_can addr;
   struct ifreq ifr;
@@ -42,7 +43,7 @@ int main(int argc, char **argv)
 
   // Make a CAN frame
   // Command to power on the motor: ID=0x104, Data=0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFF 0xFC
-  frame.can_id = 0x104;
+  frame.can_id = can_id;
   frame.can_dlc = 8;
   std::memset(frame.data, 0xFF, 7);
   frame.data[7] = 0xFC;
