@@ -41,7 +41,7 @@ def generate_launch_description():
         [
             package,
             "config",
-            "ak80_8.controller.yaml",
+            "ak80_8_controller.yaml",
         ]
     )
     rviz_config_file = PathJoinSubstitution(
@@ -106,10 +106,10 @@ def generate_launch_description():
     )
 
     nodes = [
-        # control_node,
+        control_node,
         robot_state_pub_node,
         joint_state_pub_gui,
-        # controller_spawner,
+        controller_spawner,
         # delay_joint_state_broadcaster_after_robot_controller_spawner,
         # delay_rviz_after_joint_state_broadcaster_spawner,
         # joint_state_broadcaster_spawner,
