@@ -1,3 +1,0 @@
-[submodule "levion_arm_ros2_control/cubemars_hardware"]
-	path = levion_arm_ros2_control/cubemars_hardware
-	url = git@github.com:aky-u/cubemars_hardware.git
