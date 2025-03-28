@@ -21,5 +21,23 @@ Install required packages.
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
+## AK Series
+
+- [AK80-8](https://www.cubemars.com/goods-1151-AK80-8.html)
+
+## Related works
+
+- <https://github.com/neurobionics/TMotorCANControl>
+
+- <https://github.com/dfki-ric-underactuated-lab/mini-cheetah-tmotor-python-can>
+
+- <https://github.com/SherbyRobotics/tmotor_ros>
+
+- <https://github.com/OpenFieldAutomation-OFA/cubemars_hardware/tree/main>
+
+## Trouble shooting
+
+- [If Motor Failed Entering Both Modes](https://www.cubemars.com/article-330-If+Motor+Failed+Entering+Both+Modes.html)
+
 <!-- > [!WARNING]
 > -->
