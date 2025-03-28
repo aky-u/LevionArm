@@ -1,6 +1,6 @@
 # Test motor connection
 
-This is a minimal package to test t-motor connection.
+This is a minimal package to test t-motor connection. This package is ignored by `colcon build` command.
 
 ## Build
 
