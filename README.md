@@ -15,5 +15,11 @@ git clone --recurse-submodules -j8 git@github.com:aky-u/LevionArm.git
 >
 > `git submodule update --init --recursive`
 
+Install required packages.
+
+```bash
+rosdep install --from-paths src --ignore-src -r -y
+```
+
 <!-- > [!WARNING]
 > -->
