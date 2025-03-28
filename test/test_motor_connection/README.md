@@ -8,10 +8,16 @@ To build the package using CMake, follow these steps:
 
 Create a build directory:
 
-  ```bash
-  cmake -S . -B build # If build directory has not been made
-  cd build
-  cmake --build .
-  ```
+```bash
+cmake -S . -B build # If build directory has not been made
+cd build
+cmake --build .
+```
 
-## Test
+## Test with Holybro
+
+```bash
+sudo modprobe mttcan
+sudo ip link set can0 type can bitrate 1000000
+sudo ip link set can0 up
+```
