@@ -73,6 +73,11 @@ def generate_launch_description():
         condition=IfCondition(gui),
     )
 
+    joint_state_pub_gui = Node(
+        package="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui"
+    )
+
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -101,12 +106,13 @@ def generate_launch_description():
     )
 
     nodes = [
-        control_node,
+        # control_node,
         robot_state_pub_node,
-        controller_spawner,
-        delay_joint_state_broadcaster_after_robot_controller_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
-        joint_state_broadcaster_spawner,
+        joint_state_pub_gui,
+        # controller_spawner,
+        # delay_joint_state_broadcaster_after_robot_controller_spawner,
+        # delay_rviz_after_joint_state_broadcaster_spawner,
+        # joint_state_broadcaster_spawner,
         rviz_node
     ]
 
