@@ -1,51 +1,113 @@
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, RegisterEventHandler
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.event_handlers import OnProcessExit
-from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution, LaunchConfiguration
 
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
-import os
-import sys
-import xacro
-import yaml
-
-def parse_xacro_to_urdf(xacro_file, urdf_file):
-  doc = xacro.process_file(xacro_file)
-  robot_desc = doc.toprettyxml(indent=' ')
-  with open(urdf_file, 'w') as f:
-    f.write(robot_desc)
 
 def generate_launch_description():
-  # Set path
-  levion_arm_ros2_control_path = os.path.join(
-    FindPackageShare('levion_arm_ros2_control').find('levion_arm_ros2_control')
-  )
+    # Set package name
+    package = FindPackageShare("levion_arm_ros2_control")
 
-  controller_config_path = os.path.join(
-    levion_arm_ros2_control_path, 'config', 'ak80_8_controller.yaml'
-  )
-  
-  xacro_path = os.path.join(
-    levion_arm_ros2_control_path, 'urdf', 'ak80_8.urdf.xacro'
-  )
+    # Declare arguments
+    declared_arguments = []
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "gui",
+            default_value="true",
+            description="Start RViz2 automatically with this launch file.",
+        )
+    )
 
-  urdf_path = os.path.join(
-    levion_arm_ros2_control_path, 'urdf', 'ak80_8.urdf'
-  )
+    # Initialize Arguments
+    gui = LaunchConfiguration("gui")
 
-  # Parse xacro to urdf
-  parse_xacro_to_urdf(xacro_path, urdf_path)
+    # Get URDF via xacro
+    robot_description_content = Command(
+        [
+            PathJoinSubstitution([FindExecutable(name="xacro")]),
+            " ",
+            PathJoinSubstitution(
+                [package, "urdf", "ak80_8.urdf.xacro"]
+            ),
+        ]
+    )
+    robot_description = {"robot_description": robot_description_content}
 
-  
+    robot_controllers = PathJoinSubstitution(
+        [
+            package,
+            "config",
+            "ak80_8.controller.yaml",
+        ]
+    )
+    rviz_config_file = PathJoinSubstitution(
+        [
+            package,
+            "rviz",
+            "ak80_8.rviz",
+        ]
+    )
 
-  # Set nodes
-  controller_node = Node(
-    package='controller_manager',
-    executable='ros2_control_node',
-    # parameters=
-  )
-  
-  return LaunchDescription([])
+    control_node = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[robot_controllers],
+        output="both",
+    )
+    robot_state_pub_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        output="both",
+        parameters=[robot_description],
+    )
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        output="log",
+        arguments=["-d", rviz_config_file],
+        condition=IfCondition(gui),
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster"],
+    )
+
+    controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["forward_position_controller", "--param-file", robot_controllers]
+    )
+
+    # Delay rviz start after `joint_state_broadcaster`
+    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[rviz_node],
+        )
+    )
+
+    delay_joint_state_broadcaster_after_robot_controller_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=controller_spawner,
+            on_exit=[joint_state_broadcaster_spawner],
+        )
+    )
+
+    nodes = [
+        control_node,
+        robot_state_pub_node,
+        controller_spawner,
+        delay_joint_state_broadcaster_after_robot_controller_spawner,
+        delay_rviz_after_joint_state_broadcaster_spawner,
+        joint_state_broadcaster_spawner,
+        rviz_node
+    ]
+
+    return LaunchDescription(declared_arguments + nodes)

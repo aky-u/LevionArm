@@ -5,11 +5,11 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    forward_position_controller:
+      type: controller_interface/ForwardCommandController
+      
     forward_velocity_controller:
-      type: forward_command_controller/ForwardCommandController
-
-    joint_trajectory_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
+      type: controller_interface/ForwardCommandController
 
 
 joint_state_broadcaster:

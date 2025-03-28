@@ -3,7 +3,7 @@
 
 <ros2_control name="ak80_8" type="system">
   <hardware>
-    <plugin>cubemars_hardware::CubeMarsSystemHardware</plugin>
+    <plugin>cubemars_hardware/CubeMarsSystemHardware</plugin>
   </hardware>
 
   <joint name="ak80_8_joint" type="revolute">

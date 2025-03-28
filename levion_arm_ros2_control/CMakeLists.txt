@@ -33,7 +33,12 @@ endif()
 
 ########### Install ###########
 install(
-  DIRECTORY bringup description
+  DIRECTORY bringup/config bringup/launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY description/launch description/mesh description/ros2_control description/urdf
   DESTINATION share/${PROJECT_NAME}
 )
 

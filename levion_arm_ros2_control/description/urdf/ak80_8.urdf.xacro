@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot name="ak80_8" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- <xacro:include filename="$(find levion_arm_ros2_control)/description/urdf/ak80_8_common.urdf.xacro"/> -->
+  <!-- Include ros2 control tags -->
+  <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/ak80_8.ros2_control.xacro"/>
 
   <!-- Main URDF -->
   <link name="ak80_8_bottom">
