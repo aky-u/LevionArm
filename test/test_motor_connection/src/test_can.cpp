@@ -1,5 +1,6 @@
 #include <chrono>
 #include <cstring>
+#include <fcntl.h>
 #include <iostream>
 #include <linux/can.h>
 #include <linux/can/raw.h>
@@ -19,6 +20,11 @@ int main(int argc, char **argv)
 
   // Create a socket
   int sock = socket(PF_CAN, SOCK_RAW, CAN_RAW);
+
+  // Set socket non-blocking
+  int flags = fcntl(sock, F_GETFL, 0);
+  fcntl(sock, F_SETFL, flags | O_NONBLOCK);
+
   if (sock < 0)
   {
     perror("Error while opening socket");
@@ -68,13 +74,15 @@ int main(int argc, char **argv)
   // Wait for a CAN frame which has the same ID as the sent frame
   // Set timeout to 3 seconds
   auto start = std::chrono::steady_clock::now();
+  std::cout << "Waiting for message..." << std::endl;
   while (recv_frame.can_id != frame.can_id)
   {
     nbytes = read(sock, &recv_frame, sizeof(struct can_frame));
     auto end = std::chrono::steady_clock::now();
     if (std::chrono::duration_cast<std::chrono::seconds>(end - start).count() > 3)
     {
-      std::cout << "Timeout" << std::endl;
+      std::cout << "Timeout: No message received" << std::endl;
+      close(sock);
       return 1;
     }
   }
