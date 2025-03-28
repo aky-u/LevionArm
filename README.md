@@ -12,6 +12,7 @@ git clone --recurse-submodules -j8 git@github.com:aky-u/LevionArm.git
 
 > [!NOTE]
 > If you have cloned without submodules, use the following command to clone submodules.
+>
 > `git submodule update --init --recursive`
 
 <!-- > [!WARNING]
