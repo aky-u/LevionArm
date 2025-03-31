@@ -23,6 +23,8 @@ rosdep install --from-paths src --ignore-src -r -y
 
 ## AK Series
 
+[Cubemars support](https://www.cubemars.com/article.php?id=261)
+
 - [AK80-8](https://www.cubemars.com/goods-1151-AK80-8.html)
 
 ## Related works
