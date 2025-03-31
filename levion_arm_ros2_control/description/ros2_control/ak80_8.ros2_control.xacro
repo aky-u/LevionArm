@@ -6,7 +6,7 @@
     <plugin>cubemars_hardware/CubeMarsSystemHardware</plugin>
   </hardware>
 
-  <joint name="ak80_8_joint" type="revolute">
+  <joint name="ak80_8_joint">
     <command_interface name="position">
       <param name="min">-3.14159265359</param>
       <param name="max">3.14159265359</param>
