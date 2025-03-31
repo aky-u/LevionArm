@@ -9,6 +9,7 @@ endif()
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   ament_cmake
   hardware_interface
+  cubemars_hardware
   pluginlib
   rclcpp
   rclcpp_lifecycle
