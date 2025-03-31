@@ -5,7 +5,7 @@
             "includePath": [
                 "/usr/include/**",
                 "/usr/local/include",
-                "/opt/ros/humble/include",
+                "/opt/ros/humble/include/**",
                 "${workspaceFolder}/**"
             ],
             "defines": [],
