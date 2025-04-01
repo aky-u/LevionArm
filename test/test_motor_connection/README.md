@@ -13,11 +13,3 @@ cmake -S . -B build # If build directory has not been made
 cd build
 cmake --build .
 ```
-
-## Test with Holybro
-
-```bash
-sudo modprobe mttcan
-sudo ip link set can0 type can bitrate 1000000
-sudo ip link set can0 up
-```

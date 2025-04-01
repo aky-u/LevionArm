@@ -29,6 +29,14 @@ rosdep install --from-paths src --ignore-src -r -y
 > rosdep update
 > ```
 
+## Setup CAN with Holybro
+
+```bash
+sudo modprobe mttcan
+sudo ip link set can0 type can bitrate 1000000
+sudo ip link set can0 up
+```
+
 ## AK Series
 
 [Cubemars support](https://www.cubemars.com/article.php?id=261)
