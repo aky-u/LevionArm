@@ -4,7 +4,12 @@ This repository contains required packages to control "Levion Arm", which is equ
 
 ## Installation
 
-Clone the repo including submodules.
+Clone the repo including submodules under the workspace.
+
+```bash
+mkdir -p levion_ws/src
+cd levion/src
+```
 
 ```bash
 git clone --recurse-submodules -j8 git@github.com:aky-u/LevionArm.git
@@ -28,6 +33,18 @@ rosdep install --from-paths src --ignore-src -r -y
 > sudo rosdep init
 > rosdep update
 > ```
+
+## Build and run
+
+```bash
+cd .. # move to workspace
+colcon build --symlink-install
+```
+
+```bash
+source install/setup.bash
+ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor controller
+```
 
 ## Setup CAN with Holybro
 
