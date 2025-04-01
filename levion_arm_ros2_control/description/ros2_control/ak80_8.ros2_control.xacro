@@ -27,7 +27,7 @@
     <state_interface name="velocity"/>
     <state_interface name="effort"/>
 
-    <param name="can_id">0x200</param>
+    <param name="can_id">104</param>
     <param name="pole_pairs">7</param>
     <param name="gear_ratio">6</param>
     <param name="kt">0.025</param>
