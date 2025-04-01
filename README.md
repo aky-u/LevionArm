@@ -21,6 +21,14 @@ Install required packages.
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
+> [!NOTE]
+> If you have'nt setup rosdep, initialize it with the command below.
+>
+> ```bash
+> sudo rosdep init
+> rosdep update
+> ```
+
 ## AK Series
 
 [Cubemars support](https://www.cubemars.com/article.php?id=261)
