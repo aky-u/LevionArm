@@ -26,6 +26,7 @@
     <state_interface name="position"/>
     <state_interface name="velocity"/>
     <state_interface name="effort"/>
+    <state_interface name="temperature"/>
 
     <param name="can_id">104</param>
     <param name="pole_pairs">7</param>
