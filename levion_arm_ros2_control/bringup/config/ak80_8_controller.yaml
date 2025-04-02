@@ -11,6 +11,9 @@ controller_manager:
     forward_velocity_controller:
       type: forward_command_controller/ForwardCommandController
 
+    forward_effort_controller:
+      type: forward_command_controller/ForwardCommandController
+
 
 joint_state_broadcaster:
   ros__parameters:
@@ -30,3 +33,9 @@ forward_velocity_controller:
     joints:
       - ak80_8_joint
     interface_name: velocity
+
+forward_effort_controller:
+  ros__parameters:
+    joints:
+      - ak80_8_joint
+    interface_name: effort
