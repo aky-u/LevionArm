@@ -34,16 +34,11 @@ rosdep install --from-paths src --ignore-src -r -y
 > rosdep update
 > ```
 
-## Build and run
+## Build
 
 ```bash
 cd .. # move to workspace
 colcon build --symlink-install
-```
-
-```bash
-source install/setup.bash
-ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor controller
 ```
 
 ## Setup CAN with Holybro
@@ -52,6 +47,13 @@ ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor contr
 sudo modprobe mttcan
 sudo ip link set can0 type can bitrate 1000000
 sudo ip link set can0 up
+```
+
+## Run single motor test
+
+```bash
+source install/setup.bash
+ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor controller
 ```
 
 ## AK Series

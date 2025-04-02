@@ -6,7 +6,8 @@
                 "/usr/include/**",
                 "/usr/local/include",
                 "/opt/ros/humble/include/**",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/**/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang-12",
