@@ -56,6 +56,11 @@ source install/setup.bash
 ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor controller
 ```
 
+## ID map
+
+BN:1088230509 = 104
+BN:1088230418 = 105
+
 ## AK Series
 
 [Cubemars support](https://www.cubemars.com/article.php?id=261)
