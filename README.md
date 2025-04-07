@@ -59,6 +59,7 @@ ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor contr
 ## ID map
 
 BN:1088230509 = 104
+
 BN:1088230418 = 105
 
 ## AK Series
