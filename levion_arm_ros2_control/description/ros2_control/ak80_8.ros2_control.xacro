@@ -29,9 +29,9 @@
     <state_interface name="temperature"/>
 
     <param name="can_id">104</param>
-    <param name="pole_pairs">7</param>
+    <param name="pole_pairs">21</param>
     <param name="gear_ratio">8</param>
-    <param name="kt">0.123</param>
+    <param name="kt">0.199</param>
   </joint>
 </ros2_control>
 
