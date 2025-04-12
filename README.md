@@ -55,7 +55,12 @@ sudo ip link set can0 up
 
 ```bash
 source install/setup.bash
-ros2 launch levion_arm_ros2_control ak80_8.launch.py # launch single motor controller
+ros2 launch your_package your_launch.py # launch single motor controller with default type = position
+```
+
+```bash
+ros2 launch your_package your_launch.py controller_type:=forward_velocity_controller # launch velocity controller
+ros2 launch your_package your_launch.py controller_type:=forward_effort_controller # launch effort controller
 ```
 
 ## ID map
