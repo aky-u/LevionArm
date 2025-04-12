@@ -32,6 +32,10 @@
     <param name="pole_pairs">21</param>
     <param name="gear_ratio">8</param>
     <param name="kt">0.199</param>
+
+    <!-- Optional parameters -->
+    <param name="pos_limit_min">0.349</param> <!--  20.00 deg -->
+    <param name="pos_limit_max">2.615</param> <!-- 149.83 deg -->
   </joint>
 </ros2_control>
 
