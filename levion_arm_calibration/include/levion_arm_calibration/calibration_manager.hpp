@@ -9,6 +9,7 @@ class CalibrationManager : public rclcpp::Node
 {
 public:
   CalibrationManager(const rclcpp::NodeOptions &options);
+  ~CalibrationManager() = default;
 }; // class CalibrationManager
 } // namespace levion_arm_calibration
 
