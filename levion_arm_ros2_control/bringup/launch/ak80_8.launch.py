@@ -26,9 +26,17 @@ def generate_launch_description():
             description="Start RViz2 automatically with this launch file.",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "controller_type",
+            default_value="forward_position_controller",
+            description="Controller type to use."
+        )
+    )
 
     # Initialize Arguments
     gui = LaunchConfiguration("gui")
+    controller_type = LaunchConfiguration("controller_type")
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -89,7 +97,7 @@ def generate_launch_description():
     controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["forward_effort_controller", "--param-file", robot_controllers],
+        arguments=[controller_type, "--param-file", robot_controllers],
     )
 
     # Delay rviz start after `joint_state_broadcaster`
