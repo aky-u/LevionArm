@@ -60,6 +60,8 @@ ros2 launch your_package your_launch.py # launch single motor controller with de
 
 ```bash
 ros2 launch your_package your_launch.py controller_type:=forward_velocity_controller # launch velocity controller
+```
+```bash
 ros2 launch your_package your_launch.py controller_type:=forward_effort_controller # launch effort controller
 ```
 
