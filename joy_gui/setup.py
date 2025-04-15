@@ -18,6 +18,6 @@ setup(
     license="TODO: License declaration",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": ["joy_gui = joy_gui.joystick_pad:main"],
+        "console_scripts": ["joystick_pad = joy_gui.joystick_pad:main"],
     },
 )
