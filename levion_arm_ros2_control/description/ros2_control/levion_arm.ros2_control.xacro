@@ -17,7 +17,8 @@
     pos_min="${shoulder_joint_pos_limit_min}"
     pos_max="${shoulder_joint_pos_limit_max}"
     vel_limit="${default_joint_velocity_limit}"
-    effort_limit="${default_joint_effort_limit}"/>
+    effort_limit="${default_joint_effort_limit}"
+    enc_off="${shoulder_joint_encoder_offset}"/>
 
   <xacro:ak80_8_ros2_control
     joint_name="joint2"
@@ -25,6 +26,7 @@
     pos_min="${elbow_joint_pos_limit_min}"
     pos_max="${elbow_joint_pos_limit_max}"
     vel_limit="${default_joint_velocity_limit}"
-    effort_limit="${default_joint_effort_limit}"/>
+    effort_limit="${default_joint_effort_limit}"
+    enc_off="${elbow_joint_encoder_offset}"/>
 </ros2_control>
 </robot>

@@ -13,8 +13,10 @@
   <!-- Joints -->
   <xacro:property name="shoulder_joint_pos_limit_min" value="-${default_joint_position_limit}"/>
   <xacro:property name="shoulder_joint_pos_limit_max" value="${default_joint_position_limit}"/>
+  <xacro:property name="shoulder_joint_encoder_offset" value="0"/>
   <xacro:property name="elbow_joint_pos_limit_min" value="0.349"/>
   <xacro:property name="elbow_joint_pos_limit_max" value="2.615"/>
+  <xacro:property name="elbow_joint_encoder_offset" value="0.349"/>
 
   <!-- Links -->
 
