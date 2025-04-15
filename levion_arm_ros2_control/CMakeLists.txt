@@ -39,7 +39,13 @@ install(
 )
 
 install(
-  DIRECTORY description/launch description/mesh description/ros2_control description/rviz description/urdf
+  DIRECTORY 
+    description/config
+    description/launch 
+    description/mesh 
+    description/ros2_control 
+    description/rviz 
+    description/urdf
   DESTINATION share/${PROJECT_NAME}
 )
 

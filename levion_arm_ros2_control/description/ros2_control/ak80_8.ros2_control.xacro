@@ -1,42 +1,22 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+<!-- include macros -->
+<xacro:include filename="$(find levion_arm_ros2_control)/config/ak80_8.macros.xacro"/>
+<xacro:include filename="$(find levion_arm_ros2_control)/config/ak80_8.property.xacro"/>
+
 <ros2_control name="ak80_8" type="system">
   <hardware>
     <plugin>cubemars_hardware/CubeMarsSystemHardware</plugin>
     <param name="can_interface">can0</param>
   </hardware>
 
-  <joint name="ak80_8_joint">
-    <command_interface name="position">
-      <param name="min">-3.14159265359</param>
-      <param name="max">3.14159265359</param>
-    </command_interface>
-
-    <command_interface name="velocity">
-      <param name="min">-10</param>
-      <param name="max">10</param>
-    </command_interface>
-
-    <command_interface name="effort">
-      <param name="min">-10</param>
-      <param name="max">10</param>
-    </command_interface>    
-
-    <state_interface name="position"/>
-    <state_interface name="velocity"/>
-    <state_interface name="effort"/>
-    <state_interface name="temperature"/>
-
-    <param name="can_id">104</param>
-    <param name="pole_pairs">21</param>
-    <param name="gear_ratio">8</param>
-    <param name="kt">0.199</param>
-
-    <!-- Optional parameters -->
-    <param name="pos_limit_min">0.349</param> <!--  20.00 deg -->
-    <param name="pos_limit_max">2.615</param> <!-- 149.83 deg -->
-  </joint>
+  <xacro:ak80_8_ros2_control
+    joint_name="ak_80_8"
+    can_id="104"
+    pos_min="${shoulder_joint_pos_limit_min}"
+    pos_max="${shoulder_joint_pos_limit_max}"
+    vel_limit="${default_joint_velocity_limit}"
+    effort_limit="${default_joint_effort_limit}"/>
 </ros2_control>
-
 </robot>
