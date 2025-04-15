@@ -82,7 +82,10 @@
     <parent link="link0"/>
     <child link="link1"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-3.14159265359" upper="3.14159265359" effort="10" velocity="10"/>
+    <limit lower="${shoulder_joint_pos_limit_min}" 
+      upper="${shoulder_joint_pos_limit_max}" 
+      effort="${default_joint_effort_limit}" 
+      velocity="${default_joint_velocity_limit}"/>
   </joint>
 
   <joint name="joint2" type="revolute">
@@ -90,6 +93,9 @@
     <parent link="link1"/>
     <child link="link2"/>
     <axis xyz="0 0 1"/>
-    <limit lower="-3.14159265359" upper="3.14159265359" effort="10" velocity="10"/>
+    <limit lower="${elbow_joint_pos_limit_min}" 
+      upper="${elbow_joint_pos_limit_max}" 
+      effort="${default_joint_effort_limit}" 
+      velocity="${default_joint_velocity_limit}"/>
   </joint>
 </robot>
