@@ -4,9 +4,11 @@
   <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/ak80_8.ros2_control.xacro"/>
 
   <!-- Main URDF -->
+  <link name="world"/>
+
   <link name="link0">
-    <origin xyz="0 0 0" rpy="${PI} 0 0"/>
     <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
         <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link0.STL" scale="1 1 1"/>
       </geometry>
@@ -44,9 +46,14 @@
     </inertial>
   </link>
   
+  <joint name="world_to_link0" type="fixed">
+    <origin xyz="0 -0.000 0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="link0"/>
+  </joint>
 
   <joint name="ak80_8_joint" type="revolute">
-    <origin xyz="0 0 0.03" rpy="0 0 0"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
     <parent link="link0"/>
     <child link="link1"/>
     <axis xyz="0 0 1"/>
