@@ -45,7 +45,7 @@ def generate_launch_description():
         [
             package,
             "rviz",
-            "ak80_8.rviz",
+            "levion_arm.rviz",
         ]
     )
 
