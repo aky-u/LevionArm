@@ -17,7 +17,7 @@ class JoystickPublisher(Node):
     def publish(self, x, y):
         msg = Twist()
         msg.linear.x = y  # Forward/backward
-        msg.angular.z = -x  # Left/right
+        msg.linear.y = -x  # Left/right
         self.publisher.publish(msg)
 
 
