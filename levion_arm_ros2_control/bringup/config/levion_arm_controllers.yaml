@@ -21,7 +21,7 @@ joint_state_broadcaster:
       - joint0
       - joint1
     # use_local_topics:
-    #   - /joint_states := /dar/joint_states
+    #   - /joint_states := /levion/joint_states
 
 forward_position_controller:
   ros__parameters:

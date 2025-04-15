@@ -19,8 +19,6 @@ joint_state_broadcaster:
   ros__parameters:
     joints:
       - ak80_8_joint
-    # use_local_topics:
-    #   - /joint_states := /dar/joint_states
 
 forward_position_controller:
   ros__parameters:
