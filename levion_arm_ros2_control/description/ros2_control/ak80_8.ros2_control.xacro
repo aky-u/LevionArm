@@ -2,8 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- include macros -->
-<xacro:include filename="$(find levion_arm_ros2_control)/description/config/ak80_8.macros.xacro"/>
-<xacro:include filename="$(find levion_arm_ros2_control)/description/config/ak80_8.property.xacro"/>
+<xacro:include filename="$(find levion_arm_ros2_control)/config/ak80_8.macros.xacro"/>
+<xacro:include filename="$(find levion_arm_ros2_control)/config/ak80_8.property.xacro"/>
 
 <ros2_control name="ak80_8" type="system">
   <hardware>
