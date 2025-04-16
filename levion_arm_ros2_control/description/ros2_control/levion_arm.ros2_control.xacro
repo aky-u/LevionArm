@@ -14,6 +14,7 @@
   <xacro:ak80_8_ros2_control
     joint_name="joint1"
     can_id="104"
+    mirrored="true"
     pos_min="${shoulder_joint_pos_limit_min}"
     pos_max="${shoulder_joint_pos_limit_max}"
     vel_limit="${default_joint_velocity_limit}"
@@ -23,6 +24,7 @@
   <xacro:ak80_8_ros2_control
     joint_name="joint2"
     can_id="105"
+    mirrored="true"
     pos_min="${elbow_joint_pos_limit_min}"
     pos_max="${elbow_joint_pos_limit_max}"
     vel_limit="${default_joint_velocity_limit}"
