@@ -4,9 +4,9 @@
     
     <!-- Compute mirrored limits -->
     <xacro:if value="${mirrored}">
-      <xacro:property name="effective_pos_min" value="$((-1.0 * pos_max))" />
-      <xacro:property name="effective_pos_max" value="$((-1.0 * pos_min))" />
-      <xacro:property name="effective_enc_off" value="$((-1.0 * enc_off))" />
+      <xacro:property name="effective_pos_min" value="${-pos_max}" />
+      <xacro:property name="effective_pos_max" value="${-pos_min}" />
+      <xacro:property name="effective_enc_off" value="${-enc_off}" />
     </xacro:if>
     <xacro:unless value="${mirrored}">
       <xacro:property name="effective_pos_min" value="${pos_min}" />
