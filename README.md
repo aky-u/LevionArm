@@ -51,18 +51,48 @@ sudo ip link set can0 type can bitrate 1000000
 sudo ip link set can0 up
 ```
 
+## Set zero position
+
+```bash
+cansend can0 00000568#01 # 104
+```
+
+```bash
+cansend can0 000005CC#01 # 204
+```
+
 ## Run single motor test
 
 ```bash
 source install/setup.bash
-ros2 launch your_package your_launch.py # launch single motor controller with default type = position
+ros2 launch levion_arm_ros2_control ak80_8..launch.py # launch single motor controller with default type = position
 ```
 
 ```bash
-ros2 launch your_package your_launch.py controller_type:=forward_velocity_controller # launch velocity controller
+source install/setup.bash
+ros2 launch levion_arm_ros2_control ak80_8..launch.py controller_type:=forward_velocity_controller # launch velocity controller
 ```
+
 ```bash
-ros2 launch your_package your_launch.py controller_type:=forward_effort_controller # launch effort controller
+source install/setup.bash
+ros2 launch levion_arm_ros2_control ak80_8..launch.py controller_type:=forward_effort_controller # launch effort controller
+```
+
+### Launch the arm
+
+```bash
+source install/setup.bash
+ros2 launch levion_arm_ros2_control levion_arm.launch.py # launch single motor controller with default type = position
+```
+
+```bash
+source install/setup.bash
+ros2 launch levion_arm_ros2_control levion_arm.launch.py controller_type:=forward_velocity_controller # launch velocity controller
+```
+
+```bash
+source install/setup.bash
+ros2 launch levion_arm_ros2_control levion_arm.launch.py controller_type:=forward_effort_controller # launch effort controller
 ```
 
 ## ID map
