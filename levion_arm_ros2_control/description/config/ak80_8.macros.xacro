@@ -11,6 +11,7 @@
     <xacro:unless value="${mirrored}">
       <xacro:property name="effective_pos_min" value="${pos_min}" />
       <xacro:property name="effective_pos_max" value="${pos_max}" />
+      <xacro:property name="effective_enc_off" value="${enc_off}" />
     </xacro:unless>
 
     <joint name="${joint_name}">
