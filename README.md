@@ -97,11 +97,13 @@ ros2 launch levion_arm_ros2_control levion_arm.launch.py controller_type:=forwar
 
 ## ID map
 
-BN:1088230509 = 104 {0x68}
+BN:1088230509 = 104 {0x68} : Left shoulder
 
-BN:1088230418 = 105 {0x69}
+BN:1088230418 = 105 {0x69} : Left elbow
 
-BN:1088221109 = 204 {0xCC}
+BN:1088221109 = 204 {0xCC} : Right shoulder
+
+BN:1088230509 = 205 {0xCD} : Right elbow
 
 ## AK Series
 
