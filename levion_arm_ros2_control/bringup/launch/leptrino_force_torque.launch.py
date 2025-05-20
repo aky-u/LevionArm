@@ -29,7 +29,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controller_type",
-            default_value="forward_position_controller",
+            default_value="fts_broadcaster",
             description="Controller type to use.",
         )
     )
@@ -52,7 +52,7 @@ def generate_launch_description():
         [
             package,
             "config",
-            "ak80_8_controller.yaml",
+            "levion_arm_controller.yaml",
         ]
     )
     rviz_config_file = PathJoinSubstitution(
@@ -88,31 +88,10 @@ def generate_launch_description():
         package="joint_state_publisher_gui", executable="joint_state_publisher_gui"
     )
 
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
-    )
-
     controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[controller_type, "--param-file", robot_controllers],
-    )
-
-    # Delay rviz start after `joint_state_broadcaster`
-    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[rviz_node],
-        )
-    )
-
-    delay_joint_state_broadcaster_after_robot_controller_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=controller_spawner,
-            on_exit=[joint_state_broadcaster_spawner],
-        )
     )
 
     nodes = [
@@ -120,8 +99,6 @@ def generate_launch_description():
         robot_state_pub_node,
         # joint_state_pub_gui,
         controller_spawner,
-        delay_joint_state_broadcaster_after_robot_controller_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes)
