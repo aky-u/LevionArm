@@ -7,6 +7,9 @@
 
 <ros2_control name="levion_arm" type="system">
   <hardware>
+    <plugin>leptrino_force_torque_sensor/LeptrinoForceTorqueSensor</plugin>
+  </hardware>
+  <hardware>
     <plugin>cubemars_hardware/CubeMarsSystemHardware</plugin>
     <param name="can_interface">can0</param>
   </hardware>
