@@ -2,6 +2,8 @@
 <robot name="levion_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- Include ros2 control tags -->
   <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/levion_arm.ros2_control.xacro"/>
+  
+  <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/leptrino_force_torque.ros2_control.xacro"/>
   <!-- include materials -->
   <xacro:include filename="$(find levion_arm_ros2_control)/config/material.macros.xacro"/>
 
@@ -70,6 +72,9 @@
       <inertia ixx="0.0001" ixy="0.0" ixz="0.0" iyy="0.0001" iyz="0.0" izz="0.0001"/>
     </inertial>
   </link>
+
+  <link name="tool_link">
+  </link>
   
   <joint name="world_to_link0" type="fixed">
     <origin xyz="0.08 0 0" rpy="0 0 0"/>
@@ -97,5 +102,11 @@
       upper="${elbow_joint_pos_limit_max}" 
       effort="${default_joint_effort_limit}" 
       velocity="${default_joint_velocity_limit}"/>
+  </joint>
+
+  <joint name="tool_joint" type="fixed">
+    <origin xyz=".255 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+    <parent link="link2"/>
+    <child link="tool_link" />
   </joint>
 </robot>
