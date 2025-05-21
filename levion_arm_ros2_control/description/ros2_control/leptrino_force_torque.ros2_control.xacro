@@ -6,6 +6,7 @@
 <ros2_control name="leptrino_force_torque" type="sensor">
   <hardware>
     <plugin>leptrino_force_torque/LeptrinoForceTorqueSensor</plugin>
+    <param name="calib_len">100</param>
   </hardware>
 
   <sensor name="leptrino_fts" type="sensor">
