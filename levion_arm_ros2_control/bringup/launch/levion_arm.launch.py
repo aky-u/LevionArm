@@ -94,6 +94,12 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster"],
     )
 
+    fts_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["fts_broadcaster"]
+    )
+
     controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -118,6 +124,7 @@ def generate_launch_description():
     nodes = [
         control_node,
         robot_state_pub_node,
+        fts_broadcaster_spawner,
         # joint_state_pub_gui,
         controller_spawner,
         delay_joint_state_broadcaster_after_robot_controller_spawner,
