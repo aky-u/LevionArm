@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="ak80_8" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="levion_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- Include ros2 control tags -->
   <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/levion_arm.ros2_control.xacro"/>
   <!-- include materials -->
