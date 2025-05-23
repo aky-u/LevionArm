@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- include macros -->
+
+<ros2_control name="leptrino_force_torque" type="sensor">
+  <hardware>
+    <plugin>leptrino_force_torque/LeptrinoForceTorqueSensor</plugin>
+    <param name="calib_len">100</param>
+  </hardware>
+
+  <sensor name="leptrino_fts" type="sensor">
+    <state_interface name="force.x"/>
+    <state_interface name="force.y"/>
+    <state_interface name="force.z"/>
+    <state_interface name="torque.x"/>
+    <state_interface name="torque.y"/>
+    <state_interface name="torque.z"/>
+    <param name="frame_id">tool_link</param>
+    <param name="fx_range">50</param>
+    <param name="fy_range">50</param>
+    <param name="fz_range">50</param>
+    <param name="tx_range">0.5</param>
+    <param name="ty_range">0.5</param>
+    <param name="tz_range">0.5</param>
+  </sensor>
+
+</ros2_control>
+</robot>

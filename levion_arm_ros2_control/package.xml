@@ -11,6 +11,7 @@
 
   <depend>rclcpp</depend>
   <depend>cubemars_hardware</depend>
+  <depend>leptrino_force_torque</depend>
 
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>diff_drive_controller</exec_depend>

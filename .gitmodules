@@ -1,3 +1,7 @@
 [submodule "cubemars_hardware"]
 	path = cubemars_hardware
 	url = git@github.com:aky-u/cubemars_hardware.git
+[submodule "leptrino_force_torque"]
+	path = leptrino_force_torque
+	url = git@github.com:aky-u/leptrino_force_torque.git
+	branch = ros2_control

@@ -29,7 +29,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controller_type",
-            default_value="forward_position_controller",
+            default_value="fts_broadcaster",
             description="Controller type to use.",
         )
     )
@@ -43,7 +43,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            PathJoinSubstitution([package, "urdf", "levion_arm.urdf.xacro"]),
+            PathJoinSubstitution([package, "urdf", "leptrino_force_torque.urdf.xacro"]),
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -59,7 +59,7 @@ def generate_launch_description():
         [
             package,
             "rviz",
-            "levion_arm.rviz",
+            "ak80_8.rviz",
         ]
     )
 
@@ -88,47 +88,17 @@ def generate_launch_description():
         package="joint_state_publisher_gui", executable="joint_state_publisher_gui"
     )
 
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster"],
-    )
-
-    fts_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["fts_broadcaster"]
-    )
-
     controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=[controller_type, "--param-file", robot_controllers],
     )
 
-    # Delay rviz start after `joint_state_broadcaster`
-    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[rviz_node],
-        )
-    )
-
-    delay_joint_state_broadcaster_after_robot_controller_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=controller_spawner,
-            on_exit=[joint_state_broadcaster_spawner],
-        )
-    )
-
     nodes = [
         control_node,
         robot_state_pub_node,
-        fts_broadcaster_spawner,
         # joint_state_pub_gui,
         controller_spawner,
-        delay_joint_state_broadcaster_after_robot_controller_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes)
