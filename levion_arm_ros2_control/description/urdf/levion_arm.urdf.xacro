@@ -1,11 +1,22 @@
 <?xml version="1.0"?>
 <robot name="levion_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Enable setting arguments from the launch file -->
+  <xacro:arg name="prefix" default="" />
+
   <!-- Include ros2 control tags -->
   <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/levion_arm.ros2_control.xacro"/>
+
+  <!-- Include macros -->
+  <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/ak80_8.macros.xacro"/>
+  <xacro:include filename="$(find levion_arm_ros2_control)/config/ak80_8.property.xacro"/>
   
   <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/leptrino_force_torque.ros2_control.xacro"/>
   <!-- include materials -->
   <xacro:include filename="$(find levion_arm_ros2_control)/config/material.macros.xacro"/>
+
+  <!-- ros2 control -->
+  <xacro:levion_system name="levion_arm" prefix="" left_arm="true" right_arm="false"/>
 
   <!-- Main URDF -->
   <link name="world"/>
