@@ -2,9 +2,30 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:macro name="levion_arm" 
-      params="parent prefix *origin left_right:=left 
-      shoulder_lower shoulder_upper shoulder_vel shoulder_effort 
-      elbow_lower elbow_upper elbow_vel elbow_effort">
+      params="parent prefix *origin left_right:=left">
+
+  <xacro:include filename="$(find levion_arm_ros2_control)/config/levion.property.xacro"/>
+
+  <xacro:if value="${left_right == 'left'}">
+    <xacro:property name="shoulder_lower" default="${left_shoulder_lower}" />
+    <xacro:property name="shoulder_upper" default="${left_shoulder_upper}" />
+    <xacro:property name="shoulder_vel" default="${left_shoulder_velocity_limit}" />
+    <xacro:property name="shoulder_effort" default="${left_shoulder_effort_limit}" />
+    <xacro:property name="elbow_lower" default="${left_elbow_lower}" />
+    <xacro:property name="elbow_upper" default="${left_elbow_upper}" />
+    <xacro:property name="elbow_vel" default="${left_elbow_velocity_limit}" />
+    <xacro:property name="elbow_effort" default="${left_elbow_effort_limit}" />
+  </xacro:if>
+  <xacro:if value="${left_right == 'right'}">
+    <xacro:property name="shoulder_lower" default="${right_shoulder_lower}" />
+    <xacro:property name="shoulder_upper" default="${right_shoulder_upper}" />
+    <xacro:property name="shoulder_vel" default="${right_shoulder_velocity_limit}" />
+    <xacro:property name="shoulder_effort" default="${right_shoulder_effort_limit}" />
+    <xacro:property name="elbow_lower" default="${right_elbow_lower}" />
+    <xacro:property name="elbow_upper" default="${right_elbow_upper}" />
+    <xacro:property name="elbow_vel" default="${right_elbow_velocity_limit}" />
+    <xacro:property name="elbow_effort" default="${right_elbow_effort_limit}" />
+  </xacro:if>
 
   <joint name="${prefix}${left_right}_base_joint" type="fixed">
     <xacro:insert_block name="origin" />
@@ -83,7 +104,7 @@
     <parent link="${prefix}${left_right}link0"/>
     <child link="${prefix}${left_right}link1"/>
     <axis xyz="0 0 1"/>
-    <limit lower="${shoulder_lower}" 
+    <limit lower="${shoulder_lower}"
       upper="${shoulder_upper}" 
       effort="${shoulder_effort}" 
       velocity="${shoulder_vel}"/>

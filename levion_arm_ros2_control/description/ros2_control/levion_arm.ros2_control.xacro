@@ -6,7 +6,7 @@
 <!-- include macros -->
 <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/ak80_8.macros.xacro"/>
 
-<xacro:include filename="$(find levion_arm_ros2_control)/config/ak80_8.property.xacro"/>
+<xacro:include filename="$(find levion_arm_ros2_control)/config/levion.property.xacro"/>
 
 <ros2_control name="${name}" type="system">
   <hardware>
@@ -21,21 +21,21 @@
       joint_name="${prefix}left_shoulder_joint"
       can_id="104"
       mirrored="true"
-      pos_min="${shoulder_joint_pos_limit_min}"
-      pos_max="${shoulder_joint_pos_limit_max}"
-      vel_limit="${default_joint_velocity_limit}"
-      effort_limit="${default_joint_effort_limit}"
-      enc_off="${shoulder_joint_encoder_offset}"/>
+      pos_min="${left_shoulder_lower}"
+      pos_max="${left_shoulder_upper}"
+      vel_limit="${left_shoulder_velocity_limit}"
+      effort_limit="${left_shoulder_effort_limit}"
+      enc_off="${left_shoulder_enc_offset}"/>
 
     <xacro:ak80_8_ros2_control
       joint_name="${prefix}left_elbow_joint"
       can_id="105"
       mirrored="true"
-      pos_min="${elbow_joint_pos_limit_min}"
-      pos_max="${elbow_joint_pos_limit_max}"
-      vel_limit="${default_joint_velocity_limit}"
-      effort_limit="${default_joint_effort_limit}"
-      enc_off="${elbow_joint_encoder_offset}"/>
+      pos_min="${left_elbow_lower}"
+      pos_max="${left_elbow_upper}"
+      vel_limit="${left_elbow_velocity_limit}"
+      effort_limit="${left_elbow_effort_limit}"
+      enc_off="${left_elbow_enc_offset}"/>
   </xacro:if>
 
   <!-- Right arm -->
@@ -45,21 +45,21 @@
       joint_name="${prefix}right_shoulder_joint"
       can_id="204"
       mirrored="false"
-      pos_min="${shoulder_joint_pos_limit_min}"
-      pos_max="${shoulder_joint_pos_limit_max}"
-      vel_limit="${default_joint_velocity_limit}"
-      effort_limit="${default_joint_effort_limit}"
-      enc_off="${shoulder_joint_encoder_offset}"/>
+      pos_min="${right_shoulder_lower}"
+      pos_max="${right_shoulder_upper}"
+      vel_limit="${right_shoulder_velocity_limit}"
+      effort_limit="${right_shoulder_effort_limit}"
+      enc_off="${right_shoulder_enc_offset}"/>
 
     <xacro:ak80_8_ros2_control
       joint_name="${prefix}right_elbow_joint"
       can_id="205"
       mirrored="false"
-      pos_min="${elbow_joint_pos_limit_min}"
-      pos_max="${elbow_joint_pos_limit_max}"
-      vel_limit="${default_joint_velocity_limit}"
-      effort_limit="${default_joint_effort_limit}"
-      enc_off="${elbow_joint_encoder_offset}"/>
+      pos_min="${right_elbow_lower}"
+      pos_max="${right_elbow_upper}"
+      vel_limit="${right_elbow_velocity_limit}"
+      effort_limit="${right_elbow_effort_limit}"
+      enc_off="${right_elbow_enc_offset}"/>
   </xacro:if>
 
 </ros2_control>
