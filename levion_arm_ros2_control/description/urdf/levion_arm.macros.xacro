@@ -30,10 +30,10 @@
   <joint name="${prefix}${left_right}_base_joint" type="fixed">
     <xacro:insert_block name="origin" />
     <parent link="${parent}"/>
-    <child link="${prefix}${left_right}link0" />
+    <child link="${prefix}${left_right}_link0" />
   </joint>
 
-  <link name="${prefix}${left_right}link0">
+  <link name="${prefix}${left_right}_link0">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -54,7 +54,7 @@
     </inertial>
   </link>
 
-  <link name="${prefix}${left_right}link1">
+  <link name="${prefix}${left_right}_link1">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -75,7 +75,7 @@
     </inertial>
   </link>
 
-  <link name="${prefix}${left_right}link2">
+  <link name="${prefix}${left_right}_link2">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -96,13 +96,13 @@
     </inertial>
   </link>
 
-  <link name="${prefix}${left_right}tool_link">
+  <link name="${prefix}${left_right}_tool_link">
   </link>
 
-  <joint name="${prefix}${left_right}shoulder_joint" type="revolute">
+  <joint name="${prefix}${left_right}_shoulder_joint" type="revolute">
     <origin xyz="0 0 0.0439" rpy="0 0 0"/>
-    <parent link="${prefix}${left_right}link0"/>
-    <child link="${prefix}${left_right}link1"/>
+    <parent link="${prefix}${left_right}_link0"/>
+    <child link="${prefix}${left_right}_link1"/>
     <axis xyz="0 0 1"/>
     <limit lower="${shoulder_lower}"
       upper="${shoulder_upper}" 
@@ -110,10 +110,10 @@
       velocity="${shoulder_vel}"/>
   </joint>
 
-  <joint name="${prefix}${left_right}elbow_joint" type="revolute">
+  <joint name="${prefix}${left_right}_elbow_joint" type="revolute">
     <origin xyz="0.32 0 0.04685" rpy="0 0 0"/>
-    <parent link="${prefix}${left_right}link1"/>
-    <child link="${prefix}${left_right}link2"/>
+    <parent link="${prefix}${left_right}_link1"/>
+    <child link="${prefix}${left_right}_link2"/>
     <axis xyz="0 0 1"/>
     <limit lower="${elbow_lower}" 
       upper="${elbow_upper}" 
@@ -121,10 +121,10 @@
       velocity="${elbow_vel}"/>
   </joint>
 
-  <joint name="${prefix}${left_right}tool_joint" type="fixed">
+  <joint name="${prefix}${left_right}_tool_joint" type="fixed">
     <origin xyz=".255 0 0" rpy="${PI/2} 0 ${PI/2}"/>
-    <parent link="${prefix}${left_right}link2"/>
-    <child link="${prefix}${left_right}tool_link"/>
+    <parent link="${prefix}${left_right}_link2"/>
+    <child link="${prefix}${left_right}_tool_link"/>
   </joint>
   </xacro:macro>
 </robot>
