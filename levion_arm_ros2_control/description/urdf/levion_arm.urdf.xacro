@@ -28,10 +28,6 @@
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:levion_arm>
 
-  <xacro:levion_arm parent="world" prefix="$(arg prefix)" left_right="right">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-  </xacro:levion_arm>
-
   <!-- ros2 control -->
   <xacro:levion_system name="levion_arm" prefix="$(arg prefix)" left_arm="true" right_arm="true"/>
 
