@@ -14,6 +14,7 @@ from PyQt5.QtCore import Qt, QTimer
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray
+from sensor_msgs.msg import JointState
 
 
 class SmartSlider(QSlider):
@@ -21,7 +22,6 @@ class SmartSlider(QSlider):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.publishing_velocity = 0.0
 
     def mouseReleaseEvent(self, event):
         self.setValue(0)  # Reset to zero
@@ -29,24 +29,49 @@ class SmartSlider(QSlider):
 
 
 class JointVelocityGui(Node):
-    def __init__(self, joint_count=6):
+    def __init__(self):
         super().__init__("joint_velocity_slider_gui")
-        self.joint_count = joint_count
+
+        # Declare and read parameter
+        self.declare_parameter("controller_name", "forward_velocity_controller")
+        controller_name = self.get_parameter("controller_name").get_parameter_value().string_value
 
         self.publisher_ = self.create_publisher(
-            Float64MultiArray, "forward_velocity_controller/commands", 10
+            Float64MultiArray, f"{controller_name}/commands", 10
         )
+
+        self.joint_state_sub = self.create_subscription(
+            JointState, "/joint_states", self.joint_state_callback, 10
+        )
+
+        self.joint_names = []
+        self.sliders = []
+        self.joint_name_to_slider = {}
+
+        self.gui_ready = False
 
         self.app = QApplication(sys.argv)
         self.window = QWidget()
         self.window.setWindowTitle("Joint Velocity GUI")
         self.layout = QVBoxLayout()
+        self.window.setLayout(self.layout)
+        self.window.show()
 
-        self.sliders = []
+        # Timer for publishing
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.publish_velocities)
+        self.timer.start(20)  # 50Hz
 
-        for i in range(joint_count):
+    def joint_state_callback(self, msg: JointState):
+        if not self.gui_ready:
+            self.joint_names = msg.name
+            self.create_sliders()
+            self.gui_ready = True
+
+    def create_sliders(self):
+        for name in self.joint_names:
             row = QHBoxLayout()
-            label = QLabel(f"Joint {i}")
+            label = QLabel(name)
             slider = SmartSlider(Qt.Horizontal)
             slider.setMinimum(-100)
             slider.setMaximum(100)
@@ -55,31 +80,27 @@ class JointVelocityGui(Node):
             slider.setTickPosition(QSlider.TicksBelow)
             slider.valueChanged.connect(self.publish_velocities)
             self.sliders.append(slider)
+            self.joint_name_to_slider[name] = slider
             row.addWidget(label)
             row.addWidget(slider)
             self.layout.addLayout(row)
 
-        self.window.setLayout(self.layout)
-        self.window.show()
-
-        # Optional: polling for publishing updates
-        self.timer = QTimer()
-        self.timer.timeout.connect(self.publish_velocities)
-        self.timer.start(20)  # 50Hz
-
     def publish_velocities(self):
+        if not self.gui_ready:
+            return
         msg = Float64MultiArray()
-        msg.data = [slider.value() * 0.01 for slider in self.sliders]
+        msg.data = [self.joint_name_to_slider[name].value() * 0.01 for name in self.joint_names]
         self.publisher_.publish(msg)
 
 
 def main(args=None):
     rclpy.init(args=args)
-    gui_node = JointVelocityGui(joint_count=2)
+    gui_node = JointVelocityGui()
 
     try:
-        rclpy.spin_once(gui_node, timeout_sec=0.1)
-        sys.exit(gui_node.app.exec_())
+        while rclpy.ok():
+            rclpy.spin_once(gui_node, timeout_sec=0.1)
+            gui_node.app.processEvents()
     except KeyboardInterrupt:
         pass
     finally:

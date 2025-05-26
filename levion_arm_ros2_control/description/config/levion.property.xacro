@@ -3,6 +3,12 @@
 
   <!-- Math -->
   <xacro:property name="PI" value="3.1415926535"/>
+  <xacro:property name="PI_2" value="${PI/2}"/>
+  <xacro:property name="PI_4" value="${PI/4}"/>
+  <xacro:property name="SQRT2" value="1.4142135623"/>
+  <xacro:property name="SQRT2_2" value="${SQRT2/2}"/>
+  <xacro:property name="SQRT3" value="1.7320508076"/>
+  <xacro:property name="SQRT3_2" value="${SQRT3/2}"/>
 
   <!-- Default -->
   <xacro:property name="default_joint_position_limit" value="${PI/2}"/>
