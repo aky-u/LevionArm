@@ -37,14 +37,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link0.STL" scale="1 1 1" color="0. 0. 0."/>
+        <mesh filename="package://levion_arm_ros2_control/mesh/Link0.STL" scale="1 1 1"/>
       </geometry>
       <xacro:levion_black/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link0.STL" scale="1 1 1"/>
+        <mesh filename="package://levion_arm_ros2_control/mesh/Link0.STL" scale="1 1 1"/>
       </geometry>
     </collision>
     <inertial>
@@ -58,14 +58,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link1.STL" scale="1 1 1"/>
+        <mesh filename="package://levion_arm_ros2_control/mesh/Link1.STL" scale="1 1 1"/>
       </geometry>
       <xacro:levion_black/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link1.STL" scale="1 1 1"/>
+        <mesh filename="package://levion_arm_ros2_control/mesh/Link1.STL" scale="1 1 1"/>
       </geometry>
     </collision>
     <inertial>
@@ -79,14 +79,14 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link2.STL" scale="1 1 1"/>
+        <mesh filename="package://levion_arm_ros2_control/mesh/Link2.STL" scale="1 1 1"/>
       </geometry>
       <xacro:levion_black/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="file://$(find levion_arm_ros2_control)/mesh/Link2.STL" scale="1 1 1"/>
+        <mesh filename="package://levion_arm_ros2_control/mesh/Link2.STL" scale="1 1 1"/>
       </geometry>
     </collision>
     <inertial>
