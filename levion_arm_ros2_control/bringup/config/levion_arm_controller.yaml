@@ -5,10 +5,10 @@ controller_manager:
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-    fts_broadcaster:
+    ## Lest arm
+    left_arm_fts_broadcaster:
       type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
 
-    ## Lest arm
     left_arm_position_controller:
       type: forward_command_controller/ForwardCommandController
       
@@ -19,6 +19,9 @@ controller_manager:
       type: forward_command_controller/ForwardCommandController
 
     ## Right arm
+    right_arm_fts_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+
     right_arm_position_controller:
       type: forward_command_controller/ForwardCommandController
 
@@ -28,10 +31,10 @@ controller_manager:
     right_arm_effort_controller:
       type: forward_command_controller/ForwardCommandController
 
-fts_broadcaster:
+left_arm_fts_broadcaster:
   ros__parameters:
-    sensor_name: leptrino_fts
-    frame_id: tool_link
+    sensor_name: left_leptrino_fts
+    frame_id: left_tool_link
 
 left_arm_position_controller:
   ros__parameters:
@@ -55,6 +58,11 @@ left_arm_effort_controller:
     interface_name: effort
 
 ## Right arm
+right_arm_fts_broadcaster:
+  ros__parameters:
+    sensor_name: right_leptrino_fts
+    frame_id: right_tool_link
+
 right_arm_position_controller:
   ros__parameters:
     joints:

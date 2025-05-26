@@ -29,7 +29,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controller_type",
-            default_value="fts_broadcaster",
+            default_value="lef_arm_fts_broadcaster",
             description="Controller type to use.",
         )
     )

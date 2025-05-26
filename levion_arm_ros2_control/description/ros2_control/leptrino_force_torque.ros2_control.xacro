@@ -9,14 +9,14 @@
     <param name="calib_len">100</param>
   </hardware>
 
-  <sensor name="leptrino_fts" type="sensor">
+  <sensor name="left_leptrino_fts" type="sensor">
     <state_interface name="force.x"/>
     <state_interface name="force.y"/>
     <state_interface name="force.z"/>
     <state_interface name="torque.x"/>
     <state_interface name="torque.y"/>
     <state_interface name="torque.z"/>
-    <param name="frame_id">tool_link</param>
+    <param name="frame_id">left_tool_link</param>
     <param name="fx_range">50</param>
     <param name="fy_range">50</param>
     <param name="fz_range">50</param>
