@@ -29,7 +29,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controller_type",
-            default_value="forward_velocity_controller",
+            default_value="left_arm_velocity_controller",
             description="Controller type to use.",
         )
     )
