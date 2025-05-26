@@ -20,7 +20,6 @@
     <xacro:ak80_8_ros2_control
       joint_name="${prefix}left_shoulder_joint"
       can_id="104"
-      mirrored="true"
       pos_min="${left_shoulder_lower}"
       pos_max="${left_shoulder_upper}"
       vel_limit="${left_shoulder_velocity_limit}"
@@ -30,7 +29,6 @@
     <xacro:ak80_8_ros2_control
       joint_name="${prefix}left_elbow_joint"
       can_id="105"
-      mirrored="true"
       pos_min="${left_elbow_lower}"
       pos_max="${left_elbow_upper}"
       vel_limit="${left_elbow_velocity_limit}"
@@ -44,7 +42,6 @@
     <xacro:ak80_8_ros2_control
       joint_name="${prefix}right_shoulder_joint"
       can_id="204"
-      mirrored="false"
       pos_min="${right_shoulder_lower}"
       pos_max="${right_shoulder_upper}"
       vel_limit="${right_shoulder_velocity_limit}"
@@ -54,7 +51,6 @@
     <xacro:ak80_8_ros2_control
       joint_name="${prefix}right_elbow_joint"
       can_id="205"
-      mirrored="false"
       pos_min="${right_elbow_lower}"
       pos_max="${right_elbow_upper}"
       vel_limit="${right_elbow_velocity_limit}"
