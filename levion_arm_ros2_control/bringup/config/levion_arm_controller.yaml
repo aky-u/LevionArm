@@ -60,7 +60,7 @@ left_arm_effort_controller:
 ## Right arm
 right_arm_fts_broadcaster:
   ros__parameters:
-    sensor_name: right_leptrino_fts
+    sensor_name: left_leptrino_fts
     frame_id: right_tool_link
 
 right_arm_position_controller:
