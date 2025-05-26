@@ -29,14 +29,32 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "controller_type",
-            default_value="forward_position_controller",
+            default_value="forward_velocity_controller",
             description="Controller type to use.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "prefix",
+            default_value='""',
+            description="Prefix of the joint names, useful for \
+        multi-robot setup. If changed than also joint names in the controllers' configuration \
+        have to be updated.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "force_torque_sensor",
+            default_value="true",
+            description="Enable force torque sensor.",
         )
     )
 
     # Initialize Arguments
     gui = LaunchConfiguration("gui")
     controller_type = LaunchConfiguration("controller_type")
+    prefix = LaunchConfiguration("prefix")
+    force_torque_sensor = LaunchConfiguration("force_torque_sensor")
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -44,6 +62,12 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution([package, "urdf", "levion_arm.urdf.xacro"]),
+            " ",
+            "prefix:=",
+            prefix,
+            " ",
+            "force_torque_sensor:=",
+            force_torque_sensor,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -84,10 +108,6 @@ def generate_launch_description():
         condition=IfCondition(gui),
     )
 
-    joint_state_pub_gui = Node(
-        package="joint_state_publisher_gui", executable="joint_state_publisher_gui"
-    )
-
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -97,7 +117,8 @@ def generate_launch_description():
     fts_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["fts_broadcaster"]
+        arguments=["fts_broadcaster"],
+        condition=IfCondition(force_torque_sensor),
     )
 
     controller_spawner = Node(
@@ -125,7 +146,6 @@ def generate_launch_description():
         control_node,
         robot_state_pub_node,
         fts_broadcaster_spawner,
-        # joint_state_pub_gui,
         controller_spawner,
         delay_joint_state_broadcaster_after_robot_controller_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,

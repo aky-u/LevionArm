@@ -21,15 +21,26 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
-            "gui",
+            "joint_state_publisher_gui",
             default_value="true",
-            description="Start RViz2 automatically with this launch file.",
+            description="Start joint_state_publisher_gui automatically with this launch file. \
+        If set to false, joint topic should be published by real robot or \
+        simulated robot.",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "prefix",
+            default_value='""',
+            description="Prefix of the joint names, useful for \
+        multi-robot setup. If changed than also joint names in the controllers' configuration \
+        have to be updated.",
         )
     )
 
     # Initialize Arguments
-    gui = LaunchConfiguration("gui")
-    controller_type = LaunchConfiguration("controller_type")
+    joint_state_publisher_gui = LaunchConfiguration("joint_state_publisher_gui")
+    prefix = LaunchConfiguration("prefix")
 
     # Get URDF via xacro
     robot_description_content = Command(
@@ -37,6 +48,9 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution([package, "urdf", "levion_arm.urdf.xacro"]),
+            " ",
+            "prefix:=",
+            prefix,
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -61,11 +75,14 @@ def generate_launch_description():
         name="rviz2",
         output="log",
         arguments=["-d", rviz_config_file],
-        condition=IfCondition(gui),
     )
 
     joint_state_pub_gui = Node(
-        package="joint_state_publisher_gui", executable="joint_state_publisher_gui"
+        package="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui",
+        name="joint_state_publisher_gui",
+        parameters=[robot_description],
+        condition=IfCondition(joint_state_publisher_gui),
     )
 
     nodes = [
