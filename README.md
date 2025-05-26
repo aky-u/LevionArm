@@ -55,10 +55,9 @@ sudo ip link set can0 up
 
 ```bash
 cansend can0 00000568#01 # 104
-```
-
-```bash
+cansend can0 00000569#01 # 105
 cansend can0 000005CC#01 # 204
+cansend can0 000005CD#01 # 205
 ```
 
 ## Run single motor test
