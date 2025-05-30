@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<xacro:macro name="levion_system" params="name prefix left_arm:=true right_arm:=false">
+<xacro:macro name="levion_system" params="name prefix left_arm:=true right_arm:=false hw_plugin:='real'"> <!-- real/mujoco-->
 
 <!-- include macros -->
 <xacro:include filename="$(find levion_arm_ros2_control)/ros2_control/ak80_8.macros.xacro"/>
@@ -9,10 +9,17 @@
 <xacro:include filename="$(find levion_arm_ros2_control)/config/levion.property.xacro"/>
 
 <ros2_control name="${name}" type="system">
-  <hardware>
-    <plugin>cubemars_hardware/CubeMarsSystemHardware</plugin>
-    <param name="can_interface">can0</param>
-  </hardware>
+  <xacro:if value="${hw_plugin == 'real'}">
+    <hardware>
+      <plugin>cubemars_hardware/CubeMarsSystemHardware</plugin>
+      <param name="can_interface">can0</param>
+    </hardware>
+  </xacro:if>
+  <xacro:if value="${hw_plugin == 'mujoco'}">
+    <hardware>
+      <plugin>mujoco_ros2_control/MujocoSystem</plugin>
+    </hardware>
+  </xacro:if>
 
   <!-- Left arm -->
   <xacro:if value="${left_arm}">
