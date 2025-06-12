@@ -19,8 +19,8 @@
   <xacro:property name="shoulder_lower" value="-${default_joint_position_limit}"/>
   <xacro:property name="shoulder_upper" value="${default_joint_position_limit}"/>
   <xacro:property name="shoulder_enc_offset" value="0"/>
-  <xacro:property name="elbow_lower" value="-2.615+SAFETY_OFFSET"/>
-  <xacro:property name="elbow_upper" value="-0.349-SAFETY_OFFSET"/>
+  <xacro:property name="elbow_lower" value="${-2.615+SAFETY_OFFSET}"/>
+  <xacro:property name="elbow_upper" value="${-0.349-SAFETY_OFFSET}"/>
   <xacro:property name="elbow_enc_offset" value="0.349"/>
 
   <!-- Left joints -->
