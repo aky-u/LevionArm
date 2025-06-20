@@ -20,6 +20,11 @@
       <plugin>mujoco_ros2_control/MujocoSystem</plugin>
     </hardware>
   </xacro:if>
+  <xacro:if value="${hw_plugin == `gazebo`}">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+  </xacro:if>
 
   <!-- Left arm -->
   <xacro:if value="${left_arm}">
