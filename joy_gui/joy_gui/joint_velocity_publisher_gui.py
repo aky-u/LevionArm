@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from PyQt5.QtWidgets import (
+from PySide6.QtWidgets import (
     QApplication,
     QWidget,
     QVBoxLayout,
@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
     QLabel,
     QHBoxLayout,
 )
-from PyQt5.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt, QTimer
 
 import rclpy
 from rclpy.node import Node
