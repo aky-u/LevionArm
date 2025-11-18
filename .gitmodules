@@ -1,6 +1,7 @@
 [submodule "cubemars_hardware"]
 	path = cubemars_hardware
 	url = https://github.com/aky-u/cubemars_hardware.git
+    branch = main
 [submodule "leptrino_force_torque"]
 	path = leptrino_force_torque
 	url = https://github.com/aky-u/leptrino_force_torque.git
