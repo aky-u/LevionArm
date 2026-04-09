@@ -60,6 +60,9 @@ cansend can0 000005CC#01 # 204
 cansend can0 000005CD#01 # 205
 ```
 
+> [!NOTE]
+> The encoder offset can be configured via the ros2_control parameter in [cubemars_hardware](https://github.com/aky-u/cubemars_hardware/tree/895332cbe19519a8229270f5b44764a187459e5b?tab=readme-ov-file#ros2_control-parameters). In this repository, it is set to 0.349 or -0.349, depending on whether the arm is the left or right one. This value is defined under the assumption that the motor is zeroed (calibrated) when the arm is fully extended and positioned at its mechanical limit, as illustrated in the cover image of this README. See [levion.property.xacro](levion_arm_ros2_control/description/config/levion.property.xacro) for details.
+
 ## Run single motor test
 
 ```bash
